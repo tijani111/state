@@ -12,22 +12,23 @@ class App extends React.Component{
     this.state = {
       Person :{ fullName:'Mohamed tijani Zouari',bio:"It won’t always be easy, but always try to do what’s right" , imgSrc:'./Mohamed Zouari.jpeg', profession:"Student"},
       show:true,
-      intervalIdi:0,
-      count:1,
+  
+      time:0,
     }; 
   
   };
-  timer() {
-    this.state.count && this.setState({count:this.state.count+1})} 
+ 
     componentDidMount() {
-      var intervalId = setInterval(this.timer, 1000);
+      this.timer = setInterval(() => this.setState({
+        time: this.state.time + 1
+      }), 1000)
   
-      this.setState({intervalIdi: intervalId});
+    
    };
    
    componentWillUnmount() {
     
-      clearInterval(this.state.intervalIdi);
+      clearInterval( this.timer);
    };
    
 
@@ -43,7 +44,7 @@ class App extends React.Component{
   render(){
     return (
       <div className="App">
- <button onClick={this.funct}  
+ <button onClick={ this.funct } 
      > {this.state.show ? 'Hide' : 'Show'}</button>
 
      <div>  {this.state.show && <div>
@@ -55,7 +56,7 @@ class App extends React.Component{
      
     </div>
  }</div>
-   <div>{this.state.intervalIdi}</div>
+   <div>{this.state.time}</div>
       </div>
     );
 
